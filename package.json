@@ -1,0 +1,39 @@
+{
+  "name": "prototype",
+  "version": "0.0.0",
+  "private": true,
+  "main": "dist/app.js",
+  "scripts": {
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "prestart": "npm run build",
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "app-root-path": "^2.2.1",
+    "bluebird": "^3.5.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "morgan": "~1.9.0",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^5.2.7",
+    "sequelize-typescript": "^1.0.0-alpha.9",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/bluebird": "^3.5.26",
+    "@types/cookie-parser": "^1.4.1",
+    "@types/express": "^4.16.1",
+    "@types/morgan": "^1.7.35",
+    "@types/mysql": "^2.15.5",
+    "@types/node": "^11.11.6",
+    "@types/sequelize": "^4.27.46",
+    "tslint": "^5.14.0",
+    "typescript": "^3.3.4000"
+  }
+}
