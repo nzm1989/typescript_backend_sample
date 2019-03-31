@@ -1,16 +1,25 @@
-import express from "express";
-import {userRepository} from "../repositories/main.repository";
-import {logger} from "../utils/logger.util";
+import { NextFunction, Request, Response, Router} from "express";
+import { inject } from "inversify";
+import { BaseHttpController, controller, httpGet} from "inversify-express-utils";
+import { UserService } from "../service/user.service";
+import {logger} from "../util/logger.util";
+import { UserServiceImpl } from "../service/impl/user.service.impl";
 
-export const userController = express.Router();
+@controller("/user")
+export class UserController extends BaseHttpController {
 
-userController.get("/user",  async (req: any, res: any, next: any) => {
-	try {
-		const data = await userRepository.getUserData();
-		logger.info(data);
-		res.json(data);
-	} catch (err) {
-		logger.error(err);
-		next(err);
+	@inject(UserServiceImpl)
+	private userService: UserService;
+
+	@httpGet("/getUserByID")
+	private async getUserByID(req: Request, res: Response, next: NextFunction) {
+		try {
+			const data = await this.userService.getUserbyID(req.query.id);
+			logger.info(data);
+			res.json(data);
+		} catch (err) {
+			logger.error(err);
+			next(err);
+		}
 	}
-});
+}

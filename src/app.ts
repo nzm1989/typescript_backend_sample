@@ -1,25 +1,26 @@
-import cookieParser from "cookie-parser";
+import * as bodyParser from "body-parser";
 import express from "express";
+import { container } from "./config/inversify.config";
+import { InversifyExpressServer } from "inversify-express-utils";
 import morgan from "morgan";
-import path from "path";
-// import indexRouter from "./controller/index";
 import {morganOption} from "./config/morgan.config";
-import mainController from "./controllers/main.controller";
-import { logger } from "./utils/logger.util";
-// import {logger} from "./modules";
+import { logger } from "./util/logger.util";
 
-const app = express();
+// create server
+const server = new InversifyExpressServer(container);
+server.setConfig((preBuildApp: express.Application) => {
+    // add body parser
+    preBuildApp.use(bodyParser.urlencoded({
+        extended: true
+    }));
 
-app.listen(3000);
+    preBuildApp.use(bodyParser.json());
+    preBuildApp.listen(3000);
 
-app.use(morgan("combined", morganOption));
-app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, "public")));
+    preBuildApp.use(morgan("combined", morganOption));
+});
 
-// app.use('/', indexRouter);
-app.use("/users", mainController.userController);
+const app: express.Application = server.build();
 
 logger.info("Application listening to port 3000");
 module.exports = app;
