@@ -1,4 +1,4 @@
-import { provide, buildProviderModule } from "inversify-binding-decorators";
+import { provide } from "inversify-binding-decorators";
 import { User } from "../../model/user.model";
 import {UserRepository} from "../../repository/main.repository";
 import { UserService } from "../user.service";
@@ -10,7 +10,11 @@ export class UserServiceImpl implements UserService {
     @inject(UserRepository)
     private userRepository: UserRepository;
 
-    public async getUserbyID(id: string): Promise<User | null> {
+    /**
+     * Get user by ID
+     * @param id
+     */
+    public async getUserByID(id: string): Promise<User | null> {
         return this.userRepository.getUserByID(id);
     }
 }

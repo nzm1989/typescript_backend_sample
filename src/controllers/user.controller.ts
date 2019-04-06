@@ -12,9 +12,9 @@ export class UserController extends BaseHttpController {
 	private userService: UserService;
 
 	@httpGet("/getUserByID")
-	private async getUserByID(req: Request, res: Response, next: NextFunction) {
+	public async getUserByID(req: Request, res: Response, next: NextFunction) {
 		try {
-			const data = await this.userService.getUserbyID(req.query.id);
+			const data = await this.userService.getUserByID(req.query.id);
 			logger.info(data);
 			res.json(data);
 		} catch (err) {
