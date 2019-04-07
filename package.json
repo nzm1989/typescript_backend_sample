@@ -2,7 +2,7 @@
   "name": "prototype",
   "version": "0.0.0",
   "private": true,
-  "main": "dist/server.js",
+  "main": "dist/app.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
