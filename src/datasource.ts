@@ -5,7 +5,8 @@ const datasource =  new Sequelize({
   dialect: "mysql",
   username: "root",
   password: "password",
-  storage: ":localhost:",
+  host: "localhost",
+  port: 3306,
   pool: {
     max: 10,
     min: 0,
