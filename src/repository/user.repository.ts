@@ -24,4 +24,11 @@ export class UserRepository {
 			});
 		// })
 	}
+
+	public async createUser(userNameInput: string, onGoingTransaction: Transaction): Promise<User | null> {
+		const user = User.build({userName: userNameInput});
+		return user.save({
+			transaction: onGoingTransaction
+		});
+	}
 }
