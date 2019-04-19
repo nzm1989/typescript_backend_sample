@@ -35,10 +35,6 @@ server.setConfig((preBuildApp: express.Application) => {
     });
 }).build().listen(3000);
 
-// const app: express.Application = server.build();
-//
-// app.listen(3000);
-
 logger.info("Server listening to port 3000");
 
 export = server;
